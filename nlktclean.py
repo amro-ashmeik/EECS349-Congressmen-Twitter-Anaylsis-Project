@@ -10,8 +10,12 @@ from nltk.tokenize import word_tokenize
 import pandas as pd
 import numpy as np
 import string
+import operator
+import csv
 
 '''df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
+issuesdf = pd.read_csv('issues.csv')
+issuelist = issuesdf['topic'].tolist()
 
 #Words to be entirely removed.
 stop_words = set(stopwords.words('english'))
@@ -30,7 +34,7 @@ for i in df.index:
 			tokens = []
 			for token in alltokens:
 				token = token.lower()
-				if token in stop_words or token in string.punctuation:
+				if token in stop_words or token in string.punctuation or token in issuelist:
 					continue
 				if 'status' in token and len(token) > 15:
 					continue
@@ -66,11 +70,9 @@ df.dropna(subset=['text'], inplace=True)
 df.drop(df[df['Party']  == 'I'].index, inplace=True) #Removing Independents
 df = shuffle(df)
 df.to_csv('testagain.csv', encoding='utf-8')
-print(df)
 #505 congressman left(503 without Independents)'''
 
 df = pd.read_csv('superclean.csv', encoding='cp1252')
-print(df)
 
 print('Learning...')
 
@@ -82,9 +84,9 @@ docs_test_label = df['Party'].tolist()[-151:]
 
 #Naive Bayes
 #text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB())])
-text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', MultinomialNB())])
-text_clf.fit(docs_train, docs_train_label)
-predicted = text_clf.predict(docs_test)
+text_clf_NB = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', MultinomialNB())])
+text_clf_NB.fit(docs_train, docs_train_label)
+predicted = text_clf_NB.predict(docs_test)
 print('NaiveBayesClassifier: ')
 print(np.mean(predicted == docs_test_label))
 
@@ -93,9 +95,9 @@ print(metrics.classification_report(docs_test_label, predicted, target_names=df[
 
 #SVM
 #text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
-text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
-text_clf.fit(docs_train, docs_train_label)  
-predicted = text_clf.predict(docs_test)
+text_clf_SVM = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
+text_clf_SVM.fit(docs_train, docs_train_label)
+predicted = text_clf_SVM.predict(docs_test)
 print('SVM: ')
 print(np.mean(predicted == docs_test_label))
 
@@ -104,15 +106,15 @@ print(metrics.classification_report(docs_test_label, predicted, target_names=df[
 
 #5-fold Cross Validation with Naive Bayes
 #text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB())])
-text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', MultinomialNB())])
-scores = cross_val_score(text_clf, df.text, df.Party, cv=5)
+#text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', MultinomialNB())])
+scores = cross_val_score(text_clf_NB, df.text, df.Party, cv=5)
 print('5-fold CV with Naive Bayes: ')
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 #5-fold Cross Validation with SVM
 #text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
-text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
-scores = cross_val_score(text_clf, df.text, df.Party, cv=5)
+#text_clf = Pipeline([('tfidfv', TfidfVectorizer()), ('clf', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42, max_iter=5, tol=None))])
+scores = cross_val_score(text_clf_SVM, df.text, df.Party, cv=5)
 print('5-fold CV with SVM: ')
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
@@ -122,8 +124,28 @@ X = vectorizer.fit_transform(docs_train)
 idf = vectorizer.idf_
 results = dict(zip(vectorizer.get_feature_names(), idf))
 
-best = sorted(results)
-print(results)
+sorted_results = sorted(results.items(), key=operator.itemgetter(1))
+#sorted_results.reverse()
+#print(sorted_results)
+
+feats = text_clf_SVM.steps[0][1].get_feature_names()
+coeff = text_clf_SVM.steps[1][1].coef_.tolist()[0]
+
+newresults = dict(zip(feats, coeff))
+dem = sorted(newresults.items(), key=operator.itemgetter(1))[:200]
+repub = sorted(newresults.items(), key=operator.itemgetter(1))[-200:]
+
+with open('repub.csv','w') as out:
+    csv_out=csv.writer(out)
+    csv_out.writerow(['feature','coefficient'])
+    for row in repub:
+        csv_out.writerow(row)
+
+with open('dem.csv','w') as out:
+    csv_out=csv.writer(out)
+    csv_out.writerow(['feature','coefficient'])
+    for row in dem:
+        csv_out.writerow(row)
 
 #--------OTHER RANDOM STUFF--------------
 #Creates tuples of text and label.
