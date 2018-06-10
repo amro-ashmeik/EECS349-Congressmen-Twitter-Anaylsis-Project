@@ -17,7 +17,9 @@ import csv
 # FORMAT = [text,#,@,issues,politicians]
 # True includes said item, False removes the time
 
-combo_list = [[False,True,True,False,False]]
+combo_list = [[True,True,True,True,False],
+			  [True,True,True,False,False]
+			 ]
 
 df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
 
@@ -92,7 +94,13 @@ for combo in combo_list:
 						#print('HNWF ' + token)
 						# Removes hashtags specific to district
 						token_length = len(token)
-						if (token_length == 3 or token_length == 4 or token_length == 7) and (token[2:3]).isdigit():
+						"""
+						print(token_length)
+						print(token_length == 7)
+						print(token[2:3])
+						print((token[2:3]).isdigit())
+						"""
+						if (token_length == 3 or token_length == 4 or token_length == 9 or token_length == 30) and (token[2:3]).isdigit():
 							#print('REMOVE DISTRICT #')
 							continue
 
@@ -115,6 +123,8 @@ for combo in combo_list:
 
 						at_next_word_flag = False
 						continue
+
+					# END NEXT WORD REMOVAL ROUTINES
 
 					# STANDARD REMOVAL ROUTINES
 
@@ -148,10 +158,9 @@ for combo in combo_list:
 
 					# OPTIONAL INCLUSION/REMOVAL SUBROUTINES
 
-					# Hashtag
-
 					#print('ht_flg')
 
+					# Hashtag
 					#if ht_flg:
 					if token == "#":
 						ht_next_word_flag = True
