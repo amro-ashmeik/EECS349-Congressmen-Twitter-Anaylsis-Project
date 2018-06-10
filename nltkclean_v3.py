@@ -17,7 +17,8 @@ import csv
 # FORMAT = [text,#,@,issues,politicians]
 # True includes said item, False removes the time
 
-combo_list = [[True,True,True,True,True],[True,True,False,False,False]]
+combo_list = [[True,True,True,True,True],
+			  [False,True,True,False,False]]
 
 df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
 
@@ -45,6 +46,10 @@ for tkn_t2c_i in issues_in:
 # MEGA ITERATOR THROUGH EACH COMBO
 for combo in combo_list:
 	# Feature Flags
+
+	if combo == [False,False,False,False,False]:
+		print('Combo skipped. Cannot evaluate on all False')
+		continue
 
 	txt_flg = combo[0]
 	ht_flg = combo[1]
@@ -78,12 +83,17 @@ for combo in combo_list:
 				for token in alltokens:
 					token = token.lower()
 					
-					# NEXT WORD REMOVAL ROUTINE
-					if ht_next_word_flag:
+					#print("\nTOKEN: " + token + "\n")
 
+					# NEXT WORD REMOVAL ROUTINE
+
+					#print("HNWF")
+
+					if ht_next_word_flag:
+						#print('HNWF ' + token)
 						# Removes hashtags specific to district
 						token_length = len(token)
-						if token_length in range(3,4) and token.isdigit():
+						if token_length in range(3,4) and token[2:3].isdigit():
 							#print('REMOVE DISTRICT #')
 							continue
 
@@ -93,6 +103,8 @@ for combo in combo_list:
 
 						ht_next_word_flag = False
 						continue
+
+					#print("ANWF")
 
 					if at_next_word_flag:
 
@@ -105,19 +117,18 @@ for combo in combo_list:
 
 					# STANDARD REMOVAL ROUTINES
 
+					#print("WEIRD")
+
 					# Handles weird case
 					if 'status' in token and len(token) > 15:
 						#print('REMOVE WEIRD SHIT ')
 						continue
 
+					#print("SUB")
+
 					# Removes word containing substring
 					if any(substring in token for substring in substrings):
 						#print('REMOVE SUBSTRING ' + token)
-						continue
-
-					# Handles stop words
-					if token in stop_words or token in string.punctuation:
-						#print('REMOVE GARBAGE ' + token)
 						continue
 
 					"""
@@ -138,7 +149,7 @@ for combo in combo_list:
 
 					# Hashtag
 
-					#print('at_flg')
+					#print('ht_flg')
 
 					#if ht_flg:
 					if token == "#":
@@ -155,6 +166,10 @@ for combo in combo_list:
 						#print('REMOVE @')
 						continue
 
+					# Handles stop words
+					if token in stop_words or token in string.punctuation:
+						#print('REMOVE GARBAGE ' + token)
+						continue
 
 					#print('iss_flg')
 
@@ -184,8 +199,8 @@ for combo in combo_list:
 
 					#print('\nREMOVED TOKEN ' + token + '\n')
 
-					#print('restart\n')
-					#time.sleep(1)
+					#print('\nrestart\n')
+					#time.sleep(2)
 					# END OF OPTIONAL ROUTINES
 
 					# END OF ROUTINES
