@@ -19,14 +19,14 @@
   h2 {
       font-size: 24px;
       text-transform: uppercase;
-      color: #303030;
+      color: #818181;
       font-weight: 600;
       margin-bottom: 30px;
   }
   h4 {
       font-size: 19px;
       line-height: 1.375em;
-      color: #303030;
+      color: #818181;
       font-weight: 400;
       margin-bottom: 30px;
   }  
@@ -216,10 +216,9 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Our Task and Approach</h2><br>
-      <h4>Our task for this machine learning project is to predict a congressman’s political party based on their tweets. This subject is particularly timely because, as the trends of Russian bots and fake news have demonstrated in the past few years, social media is a powerful medium for impacting the minds of voters. Therefore, the use of social media is essential for today’s politicians to gain an edge in elections by creating a medium in which they can connect with their constituents and receive feedback, demonstrate their commitment to making a difference for their voter base, and to give their views on current events, bills, elections, etc. Twitter is also a very unique medium when it comes to expression because the limited word count in each tweet forces the user to make each word count; therefore, the words that the politician use in each tweet are more likely to be more partisan to appeal to their voter base.</h4><br>
-      <p>The task is a text classification problem, so Support Vector Machines and Naive Bayes were our best options. Our standard, baseline features consisted of all the words of all the tweets for each congressman. We varied the features by filtering them in different ways, such as only using hashtags and only using @'s.</p>
-      <br>
+      <h2>Our Task and Approach</h2>
+      <h4>Our task for this machine learning project is to predict a congressman’s political party based on their tweets. This subject is particularly timely because, as the trends of Russian bots and fake news have demonstrated in the past few years, social media is a powerful medium for impacting the minds of voters. Therefore, the use of social media is essential for today’s politicians to gain an edge in elections by creating a medium in which they can connect with their constituents and receive feedback, demonstrate their commitment to making a difference for their voter base, and to give their views on current events, bills, elections, etc. Twitter is also a very unique medium when it comes to expression because the limited word count in each tweet forces the user to make each word count; therefore, the words that the politician use in each tweet are more likely to be more partisan to appeal to their voter base.</h4>
+      <h4>The task is a text classification problem, so Support Vector Machines and Naive Bayes were our best options. Our standard, baseline features consisted of all the words of all the tweets for each congressman. We varied the features by filtering them in different ways, such as only using hashtags and only using @'s.</h4>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-signal logo"></span>
@@ -233,59 +232,11 @@
       <span class="glyphicon glyphicon-globe logo slideanim"></span>
     </div>
     <div class="col-sm-8">
-      <h2>Key Results</h2><br>
+      <h2>Key Results</h2>
       <h4>We saw extremely high accuracies in both our classifiers. On our standard features, SVM had a 5-fold cross-validation accuracy of 95% and Naive Bayes an accuracy of 93%. Only using hashtags saw an even greater performance in Naive Bayes, reaching 95% and the same accuracy for SVM. In our report, we discuss in more detail how varying the features affected the accuracies.</h4>
     </div>
   </div>
 </div>
-
-<!-- Container (Services Section) -->
-<div id="services" class="container-fluid text-center">
-  <h2>SERVICES</h2>
-  <h4>What we offer</h4>
-  <br>
-  <div class="row slideanim">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-off logo-small"></span>
-      <h4>POWER</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-heart logo-small"></span>
-      <h4>LOVE</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-lock logo-small"></span>
-      <h4>JOB DONE</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-  </div>
-  <br><br>
-  <div class="row slideanim">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-leaf logo-small"></span>
-      <h4>GREEN</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-certificate logo-small"></span>
-      <h4>CERTIFIED</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-wrench logo-small"></span>
-      <h4 style="color:#303030;">HARD WORK</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-  </div>
-</div>
-</div>
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-</footer>
 
 <script>
 $(document).ready(function(){
