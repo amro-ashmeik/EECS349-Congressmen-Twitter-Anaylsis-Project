@@ -17,11 +17,16 @@ import csv
 # FORMAT = [text,#,@,issues,politicians]
 # True includes said item, False removes the time
 
-combo_list = [[True,True,True,True,False],
-			  [True,True,True,False,False]
+combo_list = [
+			 [True,True,True,True,True],
+			 [True,False,False,False,False],
+			 [False,True,False,False,False],
+			 [False,False,True,False,False],
+			 [False,False,False,True,False],
+			 [False,False,False,False,True]
 			 ]
 
-df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
+#df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
 
 names_in = csv.reader(open('wiki-output_gov_mod.csv', 'r'))
 issues_in = csv.reader(open('Issues.csv', 'r'))
@@ -42,11 +47,12 @@ for tkn_t2c_p in names_in:
 issues = []
 for tkn_t2c_i in issues_in:
 	issues.append(tkn_t2c_i[0])
-# GRAB ISSUES
 
 # MEGA ITERATOR THROUGH EACH COMBO
 for combo in combo_list:
 	# Feature Flags
+
+	df = pd.read_csv('500tweetsfinal.csv', encoding='cp1252')
 
 	if combo == [False,False,False,False,False]:
 		print('Combo skipped. Cannot evaluate on all False')
@@ -102,11 +108,15 @@ for combo in combo_list:
 						"""
 						if (token_length == 3 or token_length == 4 or token_length == 9 or token_length == 30) and (token[2:3]).isdigit():
 							#print('REMOVE DISTRICT #')
+							ht_next_word_flag = False
 							continue
 
 						if ht_flg:
 							tokens.append(token)
 							#print('ADD NEXT WORD ' + token)
+							ht_next_word_flag = False
+							#print('TOKEN LIST: ' + str(tokens))
+							continue
 
 						#print('NEITHER')
 
@@ -220,6 +230,8 @@ for combo in combo_list:
 
 	#Combining all 500 tweets into one text column.
 	print ('Concatenating text columns into one...\n')
+
+	print(df)
 
 	cols = [x for x in df.columns if x != 'Name' and x != 'Party']
 
