@@ -1,0 +1,55 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (https://startbootstrap.com/template-overviews/scrolling-nav)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
+ */
+
+header {
+  padding: 154px 0 100px;
+}
+
+@media (min-width: 992px) {
+  header {
+    padding: 156px 0 100px;
+  }
+}
+
+section {
+  padding: 150px 0;
+}
+
+.smaller {
+
+	font-size: 15px;
+}
+
+.contactme {
+
+	font-size: 30px;
+	color: white;
+	text-align: center;
+	padding-bottom: 0px;
+}
+
+.names {
+
+	font-size: 25px;
+}
+
+.webstitle {
+
+	font-size: 50px;
+}
+
+#task {
+
+  background-image: url("images/politicalbird.jpg");
+  background-repeat: no-repeat;
+  background-position: 0px 5px;
+  background-size: 30%;
+}
+
+.tweetify {
+
+	background-color: #1da1f2;
+}
