@@ -67,7 +67,9 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Our Approach</h2>
-            <p class="lead">The task is a text classification problem, so Support Vector Machines and Naive Bayes were our best options. Our standard, baseline features consisted of all the words of all the tweets for each congressman. We varied the features by filtering them in different ways, such as only using hashtags and only using @'s.</p>
+            <p class="lead">Our chosen task is a text classification problem, more specifically a sentiment analysis problem, so through 
+            research, we determined that Recurrent Neural Networks, Support Vector Machines, and Naive Bayes were all good options for machine learning models for sentiment analysis. After further study, we decided to use the Naive Bayes and Support Vector Machines models; after trying both after preprocessing our data, both models performed extremely well and only took a few minutes to run on our huge dataset and therefore, we decided to use both. Our baseline features consisted of the words in each tweet; more specifically, we focused on the the content of hashtags and @'s, common political issues, politician's names and normal text (all text featured in the tweets that does not fall under the category of any of the previous features). The list of political issues we searched for in the tweets was scraped and compiled from various websites on the Internet. The list of politician’s names is composed of all members of Congress, the president, his cabinet, all heads of major federal bureaus and notable public figures and was also scraped from the Internet. Sources for both are listed in References. In all tables and figures, the data set containing all features is referred to as Standard and each dataset containing only one of these individual features are referred to by the name of that feature.
+            </p>
           </div>
         </div>
       </div>
@@ -78,7 +80,10 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Key Results</h2>
-            <p class="lead">We saw extremely high accuracies in both our classifiers. On our standard features, SVM had a 5-fold cross-validation accuracy of 95% and Naive Bayes an accuracy of 93%. Only using hashtags saw an even greater performance in Naive Bayes, reaching 95% and the same accuracy for SVM. In our report, we discuss in more detail how varying the features affected the accuracies.</p>
+            <p class="lead">Using both Naive Bayes and SVM, we found the accuracy of our model’s ability to classify each politician into their respective party based on all of the features in the dataset as well as by evaluating each feature in the data set individually (See figure below). To better understand the total accuracy that we calculated for each algorithm, we calculated the precision, recall, and various other metrics of the models run on all features in order to find the total accuracy. We also used SVM to find which words from the dataset are the most polarized. The final metric we evaluated was the accuracy of each model after the top N number of these polarized words we removed. The figure below summarizes the results of the performances of Naive Bayes and SVM across different selections of features. "Standard" consists of all features; "Normal Text" consists of all features excluding hashtags, @s, political issues, and politcians' names; and "Hashtags", "@s", "Political Issues", and "Politicians' Names" consist of only those features respecively.</p>
+            <img src="Figure2.png" alt="Figure2" id="figure2">
+            <p class="lead finalreport">Final Report PDF: **Insert link here**</p>
+            <p class="lead">GitHub repository of code used: **Insert link here**</p>
           </div>
         </div>
       </div>

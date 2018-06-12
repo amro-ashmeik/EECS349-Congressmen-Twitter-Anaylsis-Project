@@ -53,3 +53,23 @@ section {
 
 	background-color: #1da1f2;
 }
+
+.finalreport {
+
+	padding-top: 100px;
+}
+
+#figure2 {
+
+	position: relative;
+	right: 150px;
+}
+
+#keyresults {
+
+  background-image: url("images/textclass.png");
+  background-repeat: no-repeat;
+  background-position: 1200px 100px;
+  background-size: 30%;
+
+}
