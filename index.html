@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Congressmen Twitter Analysis</title>
+    <title>EECS 349 Final Project</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Congressmen Twitter Analysis</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">EECS 349 Final Project</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,10 +45,10 @@
 
     <header class="bg-primary text-white tweetify">
       <div class="container text-center">
-        <h1 class='webstitle'>Congressmen Twitter Analysis</h1>
-        <p class="names">Daniel McGrory</p>
+        <h1 class='webstitle'>Analysis of the Relationship between U.S. Congressmen’s Tweets and Their Political Party</h1>
         <p class="names">Amro Ashmeik</p>
-        <div class="smaller">Northwestern University EECS349 Machine Learning</div> 
+        <p class="names">Daniel McGrory</p>
+        <div class="smaller">Northwestern University EECS 349 Machine Learning</div> 
     </header>
 
     <section id="task">
@@ -56,7 +56,7 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Our Task</h2>
-            <p class="lead">Our task for this machine learning project is to predict a congressman’s political party based on their tweets. This subject is particularly timely because, as the trends of Russian bots and fake news have demonstrated in the past few years, social media is a powerful medium for impacting the minds of voters. Therefore, the use of social media is essential for today’s politicians to gain an edge in elections by creating a medium in which they can connect with their constituents and receive feedback, demonstrate their commitment to making a difference for their voter base, and to give their views on current events, bills, elections, etc. Twitter is also a very unique medium when it comes to expression because the limited word count in each tweet forces the user to make each word count; therefore, the words that the politician use in each tweet are more likely to be more partisan to appeal to their voter base.</p>
+            <p class="lead">Our task for this machine learning project is to predict a congressman’s political party based on their tweets. This subject is particularly timely because social media is a powerful medium for impacting the minds of voters, as we have seen with the elections of Obama and Trump, and therefore, social media is an incredibly useful tool for politicians to influence their voter bases and reassure them that they are meeting their campaign promises so that they get an edge in reelection, or for use as a political tool for various purposes such as to put pressure on opponents in order to pass bills, etc.</p>
           </div>
         </div>
       </div>
@@ -67,8 +67,7 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Our Approach</h2>
-            <p class="lead">Our chosen task is a text classification problem, more specifically a sentiment analysis problem, so through 
-            research, we determined that Recurrent Neural Networks, Support Vector Machines, and Naive Bayes were all good options for machine learning models for sentiment analysis. After further study, we decided to use the Naive Bayes and Support Vector Machines models; after trying both after preprocessing our data, both models performed extremely well and only took a few minutes to run on our huge dataset and therefore, we decided to use both. Our baseline features consisted of the words in each tweet; more specifically, we focused on the the content of hashtags and @'s, common political issues, politician's names and normal text (all text featured in the tweets that does not fall under the category of any of the previous features). The list of political issues we searched for in the tweets was scraped and compiled from various websites on the Internet. The list of politician’s names is composed of all members of Congress, the president, his cabinet, all heads of major federal bureaus and notable public figures and was also scraped from the Internet. Sources for both are listed in References. In all tables and figures, the data set containing all features is referred to as Standard and each dataset containing only one of these individual features are referred to by the name of that feature.
+            <p class="lead">Our chosen task is a text classification problem, more specifically a sentiment analysis problem, so we decided to use the Naive Bayes and Support Vector Machines models; after trying both after preprocessing our data, both models performed extremely well and only took a few minutes to run on our huge dataset and therefore, we decided to use both. Our baseline features consisted of the words in each tweet; more specifically, we focused on the the content of hashtags and @'s, common political issues, politician's names and normal text (all text featured in the tweets that does not fall under the category of any of the previous features). The list of political issues we searched for in the tweets was scraped and compiled from various websites on the Internet. The list of politician’s names is composed of all members of Congress, the president, his cabinet, all heads of major federal bureaus and notable public figures and was also scraped from the Internet.
             </p>
           </div>
         </div>
@@ -80,10 +79,11 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Key Results</h2>
-            <p class="lead">Using both Naive Bayes and SVM, we found the accuracy of our model’s ability to classify each politician into their respective party based on all of the features in the dataset as well as by evaluating each feature in the data set individually (See figure below). To better understand the total accuracy that we calculated for each algorithm, we calculated the precision, recall, and various other metrics of the models run on all features in order to find the total accuracy. We also used SVM to find which words from the dataset are the most polarized. The final metric we evaluated was the accuracy of each model after the top N number of these polarized words we removed. The figure below summarizes the results of the performances of Naive Bayes and SVM across different selections of features. "Standard" consists of all features; "Normal Text" consists of all features excluding hashtags, @s, political issues, and politcians' names; and "Hashtags", "@s", "Political Issues", and "Politicians' Names" consist of only those features respecively.</p>
+            <p class="lead">Using both Naive Bayes and SVM, we found the accuracy of our model’s ability to classify each politician into their respective party based on all of the features in the dataset as well as by evaluating each feature in the data set individually (See figure below). The overall accuracy of both classifiers when run on our total dataset was at least 93%, indicating that we were able to successfully able to classify congressmen as their respective party with a relatively high degree of accuracy. To better understand the total accuracy that we calculated for both algorithms, we derived the precision, recall, and various other metrics of the models run on all features in order to find the total accuracy.  We also used SVM to find which words from the dataset are the most polarized. The final metric we evaluated was the accuracy of each model after the top N number of these polarized words we removed.</p>
             <img src="Figure2.png" alt="Figure2" id="figure2">
+            <p class="exp">Figure 1: Bar graph of the accuracy values calculated for the entire dataset and each individual feature using both algorithms. "Standard" consists of all features; "Normal Text" consists of all features excluding hashtags, @s, political issues, and politcians' names; and "Hashtags", "@s", "Political Issues", and "Politicians' Names" consist of only those features respecively.</p>
             <p class="lead finalreport">Final Report PDF: **Insert link here**</p>
-            <p class="lead">GitHub repository of code used: **Insert link here**</p>
+            <p class="lead">GitHub repository of code used: https://github.com/amro-ashmeik/EECS349-Congressmen-Twitter-Anaylsis-Project</p>
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@
     <footer class="py-5 bg-dark">
       <div class="container">
           <p class="contactme">Contact us</p>
-          <p class="m-0 text-center text-white">danielmcgrory2020@u.northwestern.edu<br>
-        amroashmeik2020@u.northwestern.edu</</p>
+          <p class="m-0 text-center text-white">amroashmeik2020@u.northwestern.edu<br>
+        danielmcgrory2020@u.northwestern.edu</</p>
       </div>
       <!-- /.container -->
     </footer>
