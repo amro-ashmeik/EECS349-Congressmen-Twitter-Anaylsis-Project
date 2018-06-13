@@ -45,14 +45,13 @@ section {
 
   background-image: url("images/politicalbird.jpg");
   background-repeat: no-repeat;
-  background-position: 0px 5px;
-  background-size: 30%;
+  background-position: 20px 5px;
+  background-size: 25%;
 }
 
 .tweetify {
 
-	background-color: #114574;
-  /* #1da1f2; */
+	background-color: #1da1f2;
 }
 
 .finalreport {
@@ -70,7 +69,20 @@ section {
 
   background-image: url("images/textclass.png");
   background-repeat: no-repeat;
-  background-position: 1200px 100px;
+  background-position: 1255px 100px;
   background-size: 30%;
 
 }
+
+.pdflink {
+
+	position: relative;
+	top: 60px;
+}
+
+.smallermargin {
+
+	padding-top: 60px;
+	padding-bottom: 85px;
+}
+
